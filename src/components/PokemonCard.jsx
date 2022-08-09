@@ -9,17 +9,25 @@ function PokemonCardComponent({ data }) {
 
     const [selectedMove, setSelectedMove] = useState()
 
+    const [selectedItem, setSelectedItem] = useState()
+
+    console.log(selectedItem)
+
     const [specie, setSpecie] = useState()
 
     const [moves] = useState(data.moves)
 
     useEffect(() => {
         document.body.style.overflowY = showMoreInfo ? "hidden" : "auto";
-        if (showMoreInfo)
+        if (showMoreInfo) {
             fetch(data.species?.url)
                 .then((response) => response.json())
                 .then((data) => setSpecie(data))
-    }, [showMoreInfo])
+        } else {
+            setSelectedMove(undefined)
+            setSelectedItem(undefined)
+        }
+    }, [showMoreInfo, data])
     return (
         <>
             {showMoreInfo &&
@@ -60,6 +68,9 @@ function PokemonCardComponent({ data }) {
                                 <div className="base-height">
                                     <div><span>base experience: </span> {data.base_experience}</div>
                                     <div><span>height: </span> {data.height}</div>
+                                    <div><span>order: </span> {data.order}</div>
+                                    {specie?.name &&
+                                        <div><span>specie: </span> {specie.name}</div>}
                                     {specie?.base_happiness &&
                                         <div><span>base happiness: </span> {specie.base_happiness}</div>}
                                     {specie?.capture_rate &&
@@ -69,19 +80,24 @@ function PokemonCardComponent({ data }) {
                                     {specie?.has_gender_differences &&
                                         <div><span>has gender differences </span></div>}
                                     {specie?.is_baby &&
-                                        <div><span>is baby </span></div>}
+                                        <div><span>is baby</span></div>}
                                     {specie?.is_legendary &&
-                                        <div><span>is legendary </span></div>}
+                                        <div><span>is legendary</span></div>}
                                     {specie?.is_mythical &&
-                                        <div><span>is mythical </span></div>}
+                                        <div><span>is mythical</span></div>}
+                                    {specie?.forms_switchable &&
+                                        <div><span>forms switchable</span></div>}
                                     {specie?.shape &&
                                         <div><span>shape: </span> {specie?.shape.name}</div>}
                                     {specie?.habitat &&
                                         <div><span>habitat: </span> {specie?.habitat.name}</div>}
                                     {specie?.generation &&
                                         <div><span>habitat: </span> {specie?.generation.name}</div>}
+                                    {specie?.color &&
+                                        <div><span>color: </span> {specie?.color.name}</div>}
+
                                 </div>
-                                {specie?.varieties?.length > 0 &&
+                                {specie?.varieties?.length > 1 &&
                                     <>
                                         <hr />
                                         <div className="moves">
@@ -99,12 +115,39 @@ function PokemonCardComponent({ data }) {
                                             </section>
                                         </div>
                                     </>
-                                }
+                                }{data?.held_items?.length > 0 &&
+                                    <>
+                                        <hr />
+                                        <div className="moves">
+                                            <section>
+                                                <h1>held items:</h1>
+                                                <p>Click on a move to see more informations in different versions.</p>
+                                                <div className="move-list">
+                                                    {data?.held_items?.map(held_item => {
+                                                        return (
+                                                            <div className={`${held_item.item.name === selectedItem?.item?.name ? "selected" : ""}`} onClick={() => setSelectedItem(held_item.item.name === selectedItem?.item?.name ? undefined : held_item)} key={held_item?.item.name}>
+                                                                <h2>{held_item?.item?.name}</h2>
+                                                            </div>
+                                                        )
+                                                    })}
+                                                </div>
+                                                {selectedItem && <div className="move-informations">
+                                                    {selectedItem?.version_details?.map(detail => {
+                                                        return (
+                                                            <div>
+                                                                <p><span>Version:</span> {detail.version.name}</p>
+                                                                <p><span>rarity:</span> {detail.rarity}</p>
+                                                            </div>
+                                                        )
+                                                    })}
+                                                </div>}
+                                            </section>
+                                        </div></>}
                                 <hr />
                                 <div className="moves">
                                     <section>
                                         <h1>Moves:</h1>
-                                        <p>Click on a move to see more informations.</p>
+                                        <p>Click on a move to see more informations in different versions.</p>
                                         <div className="move-list">
                                             {moves.map(move => {
                                                 return (
@@ -114,7 +157,7 @@ function PokemonCardComponent({ data }) {
                                                 )
                                             })}
                                         </div>
-                                        <div className="move-informations">
+                                        {selectedMove && <div className="move-informations">
                                             {selectedMove?.version_group_details?.map(moveDetails => {
                                                 return (
                                                     <div>
@@ -125,7 +168,7 @@ function PokemonCardComponent({ data }) {
                                                     </div>
                                                 )
                                             })}
-                                        </div>
+                                        </div>}
                                     </section>
                                 </div>
                                 <hr />
