@@ -1,16 +1,84 @@
-html, body, div, span, applet, object, iframe,
-h1, h2, h3, h4, h5, h6, p, blockquote, pre,
-a, abbr, acronym, address, big, cite, code,
-del, dfn, em, img, ins, kbd, q, s, samp,
-small, strike, strong, sub, sup, tt, var,
-b, u, i, center,
-dl, dt, dd, ol, ul, li,
-fieldset, form, label, legend,
-table, caption, tbody, tfoot, thead, tr, th, td,
-article, aside, canvas, details, embed, 
-figure, figcaption, footer, header, hgroup, 
-menu, nav, output, ruby, section, summary,
-time, mark, audio, video {
+html,
+body,
+div,
+span,
+applet,
+object,
+iframe,
+h1,
+h2,
+h3,
+h4,
+h5,
+h6,
+p,
+blockquote,
+pre,
+a,
+abbr,
+acronym,
+address,
+big,
+cite,
+code,
+del,
+dfn,
+em,
+img,
+ins,
+kbd,
+q,
+s,
+samp,
+small,
+strike,
+strong,
+sub,
+sup,
+tt,
+var,
+b,
+u,
+i,
+center,
+dl,
+dt,
+dd,
+ol,
+ul,
+li,
+fieldset,
+form,
+label,
+legend,
+table,
+caption,
+tbody,
+tfoot,
+thead,
+tr,
+th,
+td,
+article,
+aside,
+canvas,
+details,
+embed,
+figure,
+figcaption,
+footer,
+header,
+hgroup,
+menu,
+nav,
+output,
+ruby,
+section,
+summary,
+time,
+mark,
+audio,
+video {
 	margin: 0;
 	padding: 0;
 	border: 0;
@@ -18,32 +86,258 @@ time, mark, audio, video {
 	font: inherit;
 	vertical-align: baseline;
 }
+
 /* HTML5 display-role reset for older browsers */
-article, aside, details, figcaption, figure, 
-footer, header, hgroup, menu, nav, section {
+article,
+aside,
+details,
+figcaption,
+figure,
+footer,
+header,
+hgroup,
+menu,
+nav,
+section {
 	display: block;
 }
+
 body {
 	line-height: 1;
 }
-ol, ul {
+
+ol,
+ul {
 	list-style: none;
 }
-blockquote, q {
+
+blockquote,
+q {
 	quotes: none;
 }
-blockquote:before, blockquote:after,
-q:before, q:after {
+
+blockquote:before,
+blockquote:after,
+q:before,
+q:after {
 	content: '';
 	content: none;
 }
+
 table {
 	border-collapse: collapse;
 	border-spacing: 0;
 }
 
+body {
+	background-color: rgb(247, 247, 247);
+	font-family: system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, 'Open Sans', 'Helvetica Neue', sans-serif;
+}
+
+:root {
+
+	--fairy-dark: rgb(240, 183, 189);
+	--fairy-light: rgb(255, 217, 221);
+
+	--dark-dark: rgb(112, 88, 72);
+	--dark-light: rgb(219, 196, 182);
+
+	--steel-dark: rgb(185, 185, 208);
+	--steel-light: rgb(235, 223, 255);
+
+	--dragon-dark: rgb(112, 56, 248);
+	--dragon-light: rgb(227, 209, 255);
+
+	--ghost-dark: rgb(113, 88, 153);
+	--ghost-light: rgb(193, 168, 233);
+
+	--rock-dark: rgb(185, 161, 56);
+	--rock-light: rgb(255, 233, 134);
+
+	--bug-dark: rgb(169, 185, 32);
+	--bug-light: rgb(245, 255, 157);
+
+	--psychic-dark: rgb(248, 88, 136);
+	--psychic-light: rgb(253, 169, 194);
+
+	--flying-dark: rgb(168, 145, 241);
+	--flying-light: rgb(212, 199, 255);
+
+	--ground-dark: rgb(225, 193, 104);
+	--ground-light: rgb(255, 236, 184);
+
+	--poison-dark: rgb(160, 64, 160);
+	--poison-light: rgb(247, 162, 247);
+
+	--fighting-dark: rgb(192, 48, 40);
+	--fighting-light: rgb(255, 145, 139);
+
+	--ice-dark: rgb(153, 217, 216);
+	--ice-light: rgb(224, 255, 254);
+
+	--electric-dark: rgb(255, 208, 19);
+	--electric-light: rgb(255, 237, 163);
+
+	--grass-dark: rgb(120, 200, 80);
+	--grass-light: rgb(180, 243, 149);
+
+	--water-dark: rgb(105, 144, 241);
+	--water-light: rgb(176, 198, 253);
+
+	--normal-dark: rgb(168, 168, 120);
+	--normal-light: rgb(229, 229, 176);
+
+	--fire-dark: rgb(240, 128, 48);
+	--fire-light: rgb(255, 211, 180);
+
+}
+
 .container {
 	max-width: 1280px;
 	margin: 0 auto;
+	background-color: white;
 }
 
+
+
+/* Navbar */
+
+header {
+	width: 100%;
+	background-color: rgb(255, 222, 34);
+}
+
+header .container {
+	background-color: #00000000;
+}
+
+
+
+/* Pokemon list */
+.pokemon-list {
+	margin: 0px auto;
+	justify-content: center;
+	display: flex;
+	flex-wrap: wrap;
+	gap: 35px;
+}
+
+.pokemon-card {
+	position: relative;
+	width: 200px;
+}
+
+.pokemon-card div {
+	padding: 5px;
+	width: 100%;
+}
+
+.pokemon-card div span {
+	color: white;
+	font-size: 13px;
+	font-weight: 500;
+	margin: 0px 3px;
+	border-radius: 10px;
+	padding: 2px 10px;
+}
+
+.pokemon-card .image {
+	width: 100%;
+	border-radius: 10px;
+	display: flex;
+	flex-direction: column;
+	align-items: center;
+	box-shadow: 2px 2px 10px rgba(51, 51, 51, 0.149);
+}
+
+.pokemon-card img {
+	margin: 20px auto 40px auto;
+	width: 100%;
+	max-width: 125px;
+}
+
+.card-info {
+	position: relative;
+	transform: translateY(-50%);
+	width: 100%;
+	border-radius: 20px 0px 20px 0px;
+	box-shadow: 2px 2px 10px rgba(51, 51, 51, 0.149);
+	display: flex;
+	justify-content: center;
+	align-items: center;
+}
+
+.card-info h2 {
+	padding: 15px 15px;
+	font-size: 15px;
+	font-weight: bolder;
+	text-align: left;
+	color: rgb(255, 255, 255);
+}
+
+
+/* Pagination */
+
+.pagination {
+	margin: auto 60px;
+	padding-top: 30px;
+	padding-bottom: 30px;
+	display: flex;
+	gap: 10px;
+	flex-wrap: wrap;
+}
+
+.pagination button {
+	cursor: pointer;
+	border-radius: 5px;
+	border: none;
+	font-size: 17px;
+	padding: 10px 15px;
+}
+
+.pagination button:disabled {
+	cursor: auto;
+}
+
+.pagination .selected {
+	background-color: rgb(220, 220, 220);
+	cursor: auto;
+}
+
+@keyframes spin {
+	0% {
+		transform: rotate(0deg);
+	}
+
+	100% {
+		transform: rotate(360deg);
+	}
+}
+
+.spin svg {
+	width: 80px;
+	height: 80px;
+	animation: spin 2s linear infinite;
+	color: #333;
+}
+
+.spin {
+	display: flex;
+	justify-content: center;
+	align-items: center;
+	width: 100%;
+	height: 80vh;
+}
+
+.perpage-form {
+	display: flex;
+	align-items: center;
+}
+
+.perpage-form form {
+	box-shadow: 2px 2px 10px rgba(51, 51, 51, 0.119);
+	padding: 15px 20px;
+	background-color: white;
+	border-radius: 5px;
+	margin: 20px 0;
+}
