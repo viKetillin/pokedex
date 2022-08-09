@@ -215,7 +215,7 @@ header .container {
 
 /* Pokemon list */
 .pokemon-list {
-	margin: 40px auto;
+	padding: 30px 0;
 	justify-content: center;
 	display: flex;
 	flex-wrap: wrap;
@@ -649,5 +649,9 @@ header .container {
 
 	.moves {
 		margin: 0 5px;
+	}
+
+	.pagination {
+		display: none;
 	}
 }
