@@ -121,7 +121,7 @@ function PokemonCardComponent({ data }) {
                                         <div className="moves">
                                             <section>
                                                 <h1>held items:</h1>
-                                                <p>Click on a move to see more informations in different versions.</p>
+                                                <p>Click on a item to see more informations in different versions.</p>
                                                 <div className="move-list">
                                                     {data?.held_items?.map(held_item => {
                                                         return (
