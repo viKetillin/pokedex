@@ -1,6 +1,18 @@
-# Aplicação pokedex
+# Aplicação pokéAPI
 
 Crie uma aplicação utilizando e consumindo a pokéAPI.​
+
+## Execução do projeto
+
+```
+npm run install
+```
+
+```
+npm run start
+```
+
+## Requisitos
 
 Lista de Pokémons
 Crie uma lista de pokémons em ordem crescente. Cada item da lista deve conter imagem, número, nome e tipo.
@@ -29,15 +41,3 @@ Utilizar Vue ou React no desenvolvimento ou automação com Gulp.
 Utilizar Sass.
 Otimizações para aumentar a velocidade de renderização.
 UI e UX bem pensadas e executadas.
-
-
-
-# Requisitos
-
-[ ] - Scroll infinito e paginação com quantidade por página (10,20,30).
-[ ] - Input com número do pokémon inicial.
-[ ] - Input com número do pokémon final que será carregado.
-[ ] - Ao clicar em um pokémon da lista, apresente os detalhes do mesmo.
-[ ] - Utilize HTML5 + CSS3 com Flex.
-[ ] - O Layout precisa ser responsivo.
-[ ] - Utilize LazyLoad para o carregamento das imagens.​

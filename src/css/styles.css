@@ -215,7 +215,7 @@ header .container {
 
 /* Pokemon list */
 .pokemon-list {
-	margin: 0px auto;
+	margin: 40px auto;
 	justify-content: center;
 	display: flex;
 	flex-wrap: wrap;
@@ -232,11 +232,15 @@ header .container {
 	width: 100%;
 }
 
-.pokemon-card div span {
+.pokemon-card .pokemon-type {
+	margin: 0px 3px;
+}
+
+
+.pokemon-type {
 	color: white;
 	font-size: 13px;
 	font-weight: 500;
-	margin: 0px 3px;
 	border-radius: 10px;
 	padding: 2px 10px;
 }
@@ -295,8 +299,8 @@ header .container {
 }
 
 
-/* Pagination */
 
+/* Pagination */
 .pagination {
 	margin: auto 60px;
 	padding-top: 30px;
@@ -359,11 +363,23 @@ header .container {
 	background-color: white;
 	border-radius: 5px;
 	margin: 20px 0;
+	display: flex;
+	align-items: center;
+	gap: 20px;
+	flex-wrap: wrap;
+}
+
+.perpage-form form input[type=number] {
+	width: 50px;
+	padding: 3px 3px 3px 10px;
+	font-size: 15px;
+	color: #444;
 }
 
 .perpage-form form label {
 	color: #333;
 	font-size: 14px;
+
 }
 
 .perpage-form form select {
@@ -406,11 +422,12 @@ header .container {
 }
 
 .pokemon-info-panel {
+	overflow-x: hidden;
 	max-height: 100vh;
 	max-width: 1080px;
 	min-height: 450px;
+	width: 100vw;
 	overflow-y: auto;
-	width: 100%;
 	margin: 0 auto;
 	background-color: white;
 	border-radius: 10px;
@@ -422,35 +439,215 @@ header .container {
 
 .panel-header {
 	color: white;
-	width: 100%;
 	font-weight: bold;
+	width: 100%;
+	font-size: 20px;
 }
 
 .panel-header h1 {
 	padding: 15px 20px;
-	font-size: 20px;
 	text-transform: uppercase;
 }
 
 .panel-body {
 	flex-grow: 1;
+	overflow-y: auto;
 	width: 100%;
 }
 
-.panel-body .general-info {
+.panel-body .info {
 	display: flex;
 	width: 100%;
 }
 
-.panel-body .general-info .images {
-	flex-grow: 0;
+
+.panel-body .info .versions {
+	padding: 20px 10px;
+	padding-bottom: 0px;
 }
 
-.panel-body .general-info .images img {
-	width: 120px;
+ .base-height {
+	padding: 0 20px;
+	display: flex;
+	flex-wrap: wrap;
+	gap: 15px;
+}
+
+.base-height div{
+	font-size: 14px;
+	color: rgb(121, 121, 121);
+	white-space: nowrap;
+}
+
+.base-height span {
+	color: rgb(94, 94, 94);
+	font-weight: 500;
+}
+
+.panel-body .info .versions .pokemon-type {
+	margin: 0 5px;
+}
+
+.panel-body .info .versions .pokemon-type:first-child {
+	margin: 0px;
+}
+
+.panel-body .info .image {
+	flex-grow: 0;
+	display: flex;
+	justify-content: center;
+}
+
+.panel-body .info .image img {
+	width: 150px;
 	padding: 10px;
 }
 
-.panel-body .general-info .stats {
+.panel-body .info .general-info {
 	flex-grow: 1;
+	display: flex;
+	flex-direction: column;
+	padding: 20px 10px;
+	gap: 30px;
+}
+.panel-body .general-info section{
+	margin: 0 auto;
+}
+
+.panel-body section h1 {
+	font-size: 18px;
+	font-weight: 500;
+	color: #444;
+}
+
+.panel-body .info .general-info .stats-buttons {
+	display: flex;
+	gap: 15px;
+	margin: 10px 0;
+	flex-wrap: wrap;
+}
+
+.panel-body .info .general-info .stats-buttons div {
+	display: flex;
+	flex-direction: column;
+	gap: 5px;
+}
+
+.panel-body .info .general-info .stats-buttons div label {
+	color: #555;
+	font-size: 12px;
+}
+
+.panel-body .info .general-info .stats-buttons span {
+	background-color: #eee;
+	border-radius: 10px;
+	padding: 10px 17px;
+	height: auto;
+	display: flex;
+	flex-direction: column;
+	gap: 5px;
+}
+
+.move-list {
+	max-width: 1000px;
+	width: 100%;
+	overflow-x: auto;
+	display: flex;
+	flex-wrap: nowrap;
+	gap: 10px;
+	padding: 10px 0;
+}
+
+.move-list div {
+	padding: 10px 20px;
+	border: 1px solid #ccc;
+	border-radius: 5px;
+	max-width: 200px;
+	font-weight: 500;
+	color: #333;
+	white-space: nowrap;
+}
+
+.move-list {
+	margin: 0 auto;
+	display: flex;
+	gap: 10px;
+	padding: 20px 0;
+}
+
+.move-list div {
+	cursor: pointer;
+	padding: 10px 20px;
+	background-color: rgb(248, 248, 248);
+	border-radius: 5px;
+	max-width: 200px;
+	font-weight: 500;
+	color: #333;
+}
+
+.move-list div.selected {
+	background-color: rgb(235, 235, 235);
+}
+
+.moves {
+	margin-top: 15px;
+	max-width: calc(100vw - 80px);
+}
+
+.moves section {
+	padding: 0 15px;
+	max-width: 1000px;
+	margin: 0 auto;
+}
+
+.moves section>p {
+	padding: 10px 0px;
+	color: #666;
+}
+
+.move-informations {
+	padding: 20px;
+	display: flex;
+	align-items: center;
+	justify-content: center;
+	flex-wrap: wrap;
+	gap: 15px;
+}
+
+.move-informations div {
+	padding: 10px 20px;
+	border-radius: 10px;
+	color: rgb(123, 123, 123);
+	background-color: rgb(246, 244, 244);
+	display: flex;
+	flex-direction: column;
+	gap: 10px;
+	text-align: center;
+}
+
+.move-informations div span {
+	color: rgb(88, 88, 88);
+	font-weight: 500;
+}
+
+
+
+@media screen and (max-width: 720px) {
+	.panel-body .info {
+		display: block;
+	}
+
+	.panel-body .info .general-info .stats-buttons {
+		justify-content: center;
+	}
+
+	.panel-body .info .image img {
+		max-width: 250px;
+		width: 700px;
+		padding: 10px;
+	}
+
+	.moves {
+		margin: 0 5px;
+	}
 }

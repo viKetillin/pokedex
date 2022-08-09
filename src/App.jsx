@@ -3,19 +3,23 @@ import PokemonCardComponent from "./components/PokemonCard";
 
 import { FaAngleRight, FaAngleDoubleRight, FaAngleLeft, FaAngleDoubleLeft } from "react-icons/fa"
 import { VscLoading } from 'react-icons/vsc'
+import InfiniteScroll from "react-infinite-scroll-component";
 
 const App = () => {
     const [pokemonList, setPokemonList] = useState([]);
     const [filteredPokemon, setFilteredPokemon] = useState([])
 
-    const [filter, setFilter] = useState({ perPage: 10, page: 1 })
+    const [filter, setFilter] = useState({ perPage: 10, page: 1, paginationType: "default" })
     const [status, setStatus] = useState("")
+    const [paginationType, setPaginationType] = useState("default")
 
+    const pageRef = React.createRef()
     const perPageRef = React.createRef()
+    const paginationTypeRef = React.createRef()
 
     function HandleChangeFilters(evt) {
         evt.preventDefault();
-        setFilter({ perPage: Number(perPageRef.current.value || 10), page: 1 });
+        setFilter({ perPage: Number(perPageRef.current.value || 10), paginationType: paginationTypeRef.current.value, page: paginationTypeRef.current.value === "scroll" ? 1 : pageRef.current.value });
     }
 
     useEffect(() => {
@@ -27,7 +31,7 @@ const App = () => {
                         return await fetch(`https://pokeapi.co/api/v2/pokemon/${pokemon.name}`)
                             .then((response) => response.json()).then(data => data)
                     }())
-                })).then(resp => { setFilteredPokemon(resp); setStatus("success"); }).catch(err => {
+                })).then(resp => { filter.paginationType === "scroll" ? setFilteredPokemon(f => ([...f, ...resp])) : setFilteredPokemon(resp); setStatus("success"); }).catch(err => {
                     console.error(err);
                     setStatus("error");
                 })
@@ -41,16 +45,21 @@ const App = () => {
             .then((data) =>
                 fetch(`https://pokeapi.co/api/v2/pokemon/?offset=0&limit=${data.count}`)
                     .then((response) => response.json())
-                    .then((data) =>
+                    .then((data) => {
+                        setStatus("success")
                         setPokemonList(
                             data.results.sort((a, b) =>
                                 a.name.toUpperCase() < b.name.toUpperCase() ? -1 : 1
                             )
                         )
+                    }
                     )
                     .catch(err => { console.error(err); setStatus("error"); })
             );
     }, []);
+
+
+
 
     function Pagination() {
         return (
@@ -76,13 +85,6 @@ const App = () => {
 
     return (
         <>
-            <header>
-                <div className="container">
-                    <div>
-                        PokeApi
-                    </div>
-                </div>
-            </header>
             <div style={{ backgroundColor: "#00000000" }} className="container">
                 <div className="perpage-form">
                     <form onSubmit={HandleChangeFilters}>
@@ -96,22 +98,54 @@ const App = () => {
                                 ))}
                             </select>
                         </label>
+
+                        {(function () {
+                            return (
+                                <>
+                                    <label>
+                                        <span>Tipo de paginação: </span>
+                                        <select onChange={evt => setPaginationType(evt.currentTarget.value)} ref={paginationTypeRef}>
+                                            <option value="default">Paginação</option>
+                                            <option value="scroll">Scroll Infinito</option>
+                                        </select>
+                                    </label>
+                                    {paginationType !== "scroll" &&
+                                        <label>
+                                            <span>Página: </span>
+                                            <input ref={pageRef} onChange={evt => { evt.currentTarget.value = evt.currentTarget.value <= 0 ? 1 : evt.currentTarget.value > pokemonList.length / filter.perPage ? Math.ceil(pokemonList.length / filter.perPage) : evt.currentTarget.value }} type="number" defaultValue={1} />
+                                        </label>}
+                                </>
+                            )
+                        }())}
+
                         <button type="submit">Filtrar</button>
                     </form>
                 </div>
             </div>
 
             <div className="container">
-                {
+                {filter.paginationType !== "default" ?
+                    <InfiniteScroll
+                        dataLength={filteredPokemon ? filteredPokemon.length : 0}
+                        next={() => setFilter(f => ({ ...f, page: f.page + 1 }))}
+                        hasMore={filter.page < pokemonList.length / filter.perPage}
+                        loader={<div className="spin"><VscLoading /></div>}
+                    >
+                        <div className="pokemon-list">
+                            {filteredPokemon.map((pokemon, index) => <PokemonCardComponent key={`${index}-${filter.page}`} data={pokemon} />)}
+                        </div>
+                    </InfiniteScroll>
+                    :
                     {
                         "success": (
-                            <>
-                                <Pagination />
-                                <div className="pokemon-list">
-                                    {filteredPokemon.map((pokemon, index) => <PokemonCardComponent key={`${index}-${filter.page}`} data={pokemon} />)}
-                                </div>
-                                <Pagination />
-                            </>
+                            filter.paginationType === "default" ?
+                                <>
+                                    <Pagination />
+                                    <div className="pokemon-list">
+                                        {filteredPokemon.map((pokemon, index) => <PokemonCardComponent key={`${index}-${filter.page}`} data={pokemon} />)}
+                                    </div>
+                                    <Pagination />
+                                </> : <></>
                         ),
                         "error": (
                             <>
