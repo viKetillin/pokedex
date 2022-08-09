@@ -265,14 +265,33 @@ header .container {
 	display: flex;
 	justify-content: center;
 	align-items: center;
+	flex-direction: column;
+	gap: 10px;
+	padding: 15px 5px !important;
 }
 
 .card-info h2 {
-	padding: 15px 15px;
 	font-size: 15px;
 	font-weight: bolder;
 	text-align: left;
 	color: rgb(255, 255, 255);
+}
+
+.card-info button {
+	padding: 5px 10px;
+	border: none;
+	font-size: 15px;
+	font-weight: bolder;
+	text-align: left;
+	color: #00000070;
+	cursor: pointer;
+	border-radius: 10px;
+	transition: all;
+	transition-duration: 300ms;
+}
+
+.card-info button:hover {
+	color: #000000aa;
 }
 
 
@@ -340,4 +359,98 @@ header .container {
 	background-color: white;
 	border-radius: 5px;
 	margin: 20px 0;
+}
+
+.perpage-form form label {
+	color: #333;
+	font-size: 14px;
+}
+
+.perpage-form form select {
+	padding: 3px 10px;
+	font-size: 15px;
+	color: #444;
+}
+
+.perpage-form form button {
+	color: rgb(28, 28, 28);
+	background-color: rgb(255, 222, 34);
+	border: none;
+	padding: 7px 10px;
+	font-size: 15px;
+	border-radius: 5px;
+	margin-left: 15px;
+	cursor: pointer;
+}
+
+.perpage-form form button:hover {
+	color: black;
+	background-color: rgb(249, 212, 2);
+}
+
+
+
+
+/* Pokemon Card Info */
+.full-screen-background {
+	background-color: #00000050;
+	position: fixed;
+	z-index: 10;
+	top: 0;
+	left: 0;
+	height: 100vh;
+	width: 100vw;
+	display: flex;
+	justify-content: center;
+	align-items: center;
+}
+
+.pokemon-info-panel {
+	max-height: 100vh;
+	max-width: 1080px;
+	min-height: 450px;
+	overflow-y: auto;
+	width: 100%;
+	margin: 0 auto;
+	background-color: white;
+	border-radius: 10px;
+	display: flex;
+	justify-content: center;
+	align-items: center;
+	flex-direction: column;
+}
+
+.panel-header {
+	color: white;
+	width: 100%;
+	font-weight: bold;
+}
+
+.panel-header h1 {
+	padding: 15px 20px;
+	font-size: 20px;
+	text-transform: uppercase;
+}
+
+.panel-body {
+	flex-grow: 1;
+	width: 100%;
+}
+
+.panel-body .general-info {
+	display: flex;
+	width: 100%;
+}
+
+.panel-body .general-info .images {
+	flex-grow: 0;
+}
+
+.panel-body .general-info .images img {
+	width: 120px;
+	padding: 10px;
+}
+
+.panel-body .general-info .stats {
+	flex-grow: 1;
 }
